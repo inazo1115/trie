@@ -26,17 +26,18 @@ func (n *Node) Insert(key []rune) {
 	n.children[key[0]].Insert(key[1:])
 }
 
-func (n *Node) Find(key []rune) (*Node, bool) {
+func (n *Node) Find(key []rune) (bool, *Node) {
 	if len(key) == 0 {
-		return n, true
+		return true, n
 	}
 	if n.children == nil || len(n.children) == 0 {
-		return nil, false
+		return false, nil
 	}
-	if _, ok := n.children[key[0]]; !ok {
-		return nil, false
+	child, ok := n.children[key[0]]
+	if !ok {
+		return false, nil
 	}
-	return n.children[key[0]].Find(key[1:])
+	return child.Find(key[1:])
 }
 
 func (n *Node) Dump(level int) {

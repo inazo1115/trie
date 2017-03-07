@@ -30,17 +30,17 @@ func TestTrie(t *testing.T) {
 	//         - う
 	//         - え
 
-	if _, ok := trie.Find([]rune("abc")); !ok {
+	if found, _ := trie.Find([]rune("abc")); !found {
 		t.Errorf("error Find")
 	}
-	if _, ok := trie.Find([]rune("あいう")); !ok {
+	if found, _ := trie.Find([]rune("あいう")); !found {
 		t.Errorf("error Find")
 	}
-	node, ok := trie.Find([]rune("ab"))
-	if !ok {
+	found, node := trie.Find([]rune("ab"))
+	if !found {
 		t.Errorf("error Find")
 	}
-	if _, ok := node.Find([]rune("d")); !ok {
+	if found, _ := node.Find([]rune("d")); !found {
 		t.Errorf("error Find")
 	}
 }
